@@ -24,9 +24,16 @@ size = Vector2(8, 15.25)
 [node name="player" type="CharacterBody2D" unique_id=692654958]
 script = ExtResource("1_sm88c")
 
+[node name="Right" type="RayCast2D" parent="." unique_id=1921304566]
+target_position = Vector2(10, 0)
+
 [node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1415651973]
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_7oa04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1769298076]
 position = Vector2(-1, 0.375)
 shape = SubResource("RectangleShape2D_d86if")
+
+[node name="Left" type="RayCast2D" parent="." unique_id=2122692454]
+target_position = Vector2(-10, 0)

@@ -12,7 +12,10 @@ func make_map():
 		tiles.append([])
 		for j in range(100):
 			var num = randf()
-			if num > 0.7:
+			if num > 0.9:
+				set_cell(Vector2i(j-50,i),0,Vector2i(2,0))
+				tiles[i].append(69696969)
+			elif num > 0.7:
 				set_cell(Vector2i(j-50,i),0,Vector2i(1,0))
 				tiles[i].append(3)
 			else:
@@ -24,16 +27,8 @@ func destroy_tile(pos):
 	var tile_pos = local_to_map(pos)
 	print(pos,tile_pos)
 	
-	var x = tile_pos.x + 50
-	var y = tile_pos.y
+	tiles[tile_pos.y][tile_pos.x+50] -= 1
 
-	if y < 0 or y >= tiles.size():
-		return
-
-	if x < 0 or x >= tiles[y].size():
-		return
-
-	tiles[y][x] -= 1
 	
 
 	if tiles[tile_pos.y ][tile_pos.x+50] == 0:

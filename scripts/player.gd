@@ -1,18 +1,15 @@
 extends CharacterBody2D
 
-
-
-const JUMP_VELOCITY = -325 #Defines constants
+const JUMP_VELOCITY = -325
 const WALL_JUMP_X = 180
 
-
 var dir := -1 #Var for the players direction
-
+@onready var right: RayCast2D = $Right
+@onready var left: RayCast2D = $Left
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer" #Loads two other noads, the players sprite and the tilemap.
 
 func _physics_process(delta: float) -> void:
-
 	# Gravity
 	if not is_on_floor():
 		velocity.y += 600 * delta
@@ -22,17 +19,15 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
-		# Wall jump
-		elif is_on_wall():
-			velocity.y = JUMP_VELOCITY
-
-			# Push away from the wall
-			if get_wall_normal().x > 0:
-				# Wall is on left
-				velocity.x = WALL_JUMP_X
-			else:
-				# Wall is on right
-				velocity.x = -WALL_JUMP_X
+		
+		elif left.is_colliding():
+			# Wall is on left
+			velocity.y = -250
+			velocity.x = WALL_JUMP_X
+		elif right.is_colliding():
+			# Wall is on right
+			velocity.y = -250
+			velocity.x = -WALL_JUMP_X
 
 	# Horizontal movement
 	if Input.is_action_pressed("ui_left"):
@@ -48,8 +43,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.x = 0
 
-	if is_on_wall() and !is_on_floor() and velocity.y > 50:
-		velocity.y = 50
+	
 	# Mining
 	if Input.is_action_just_pressed("ui_accept"):
 		if Input.is_action_pressed("ui_down"):
