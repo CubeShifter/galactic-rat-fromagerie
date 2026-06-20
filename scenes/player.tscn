@@ -24,7 +24,7 @@ size = Vector2(8, 15.25)
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_sm88c")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7oa04")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
