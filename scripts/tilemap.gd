@@ -3,7 +3,7 @@ extends TileMapLayer
 var tiles = []
 
 func _ready() -> void:
-	make_map()
+	make_map() 
 	for i in range(40,60):
 		print(tiles[0][i],i)
 # Called when the node enters the scene tree for the first time.
