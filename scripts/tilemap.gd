@@ -24,8 +24,16 @@ func destroy_tile(pos):
 	var tile_pos = local_to_map(pos)
 	print(pos,tile_pos)
 	
-	tiles[tile_pos.y][tile_pos.x+50] -= 1
+	var x = tile_pos.x + 50
+	var y = tile_pos.y
 
+	if y < 0 or y >= tiles.size():
+		return
+
+	if x < 0 or x >= tiles[y].size():
+		return
+
+	tiles[y][x] -= 1
 	
 
 	if tiles[tile_pos.y ][tile_pos.x+50] == 0:
