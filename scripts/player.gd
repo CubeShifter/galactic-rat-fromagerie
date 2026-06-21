@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 enum CheeseType { SOFT = 0, HARD = 1 }
 
-const JUMP_VELOCITY = -275
+var JUMP_VELOCITY = -275 - Global.upgrades["Move Speed"]*13
 const WALL_JUMP_X = 180
-const MOVE_SPEED = 120
+var MOVE_SPEED = 80 + Global.upgrades["Move Speed"] * 10
 const GRAVITY = 600
 
 const BombScene = preload("res://scenes/bomb.tscn")
 
 var dir := -1
+var can_mine = true
 var cheese := [0,0,0,0,0]
 var jump_buffer := 0
 
@@ -19,6 +20,7 @@ var jump_buffer := 0
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
 @onready var cheese_label: RichTextLabel = $"../CanvasLayer/RichTextLabel"
 @onready var v_box_container: VBoxContainer = $"../CanvasLayer3/TextureRect/VBoxContainer"
+@onready var timer: Timer = $Timer
 
 
 
@@ -66,26 +68,27 @@ func handle_jump():
 			velocity.y = JUMP_VELOCITY
 			jump_buffer = 0
 		elif left.is_colliding():
-			velocity.y = -225
+			velocity.y = -225- Global.upgrades["Move Speed"]*13
 			velocity.x = WALL_JUMP_X
 			jump_buffer = 0
 		elif right.is_colliding():
-			velocity.y = -225
+			velocity.y = -225 - Global.upgrades["Move Speed"]*13
 			velocity.x = -WALL_JUMP_X
 			jump_buffer = 0
 
 
 # MINING
 func handle_mining():
-	if not Input.is_action_just_pressed("dig"):
+	if not Input.is_action_just_pressed("dig") or not can_mine:
 		return
-
+	can_mine = false
 	var offset := get_mine_offset()
 	var mined: int = tile_map_layer.destroy_tile(position + offset)
 
 	if mined >= 0:
 		cheese[mined] += 1
 		update_ui()
+	timer.start()
 		
 
 
@@ -96,6 +99,7 @@ func get_mine_offset() -> Vector2:
 		return Vector2(0, -16)
 	else:
 		return Vector2(dir * 16, 0)
+	
 
 
 func handle_bomb() -> void:
@@ -112,3 +116,9 @@ func update_ui():
 
 	for i in range(5):
 		v_box_container.get_node(String("RichTextLabel" + str(i+1))).text = str(cheese[i])
+		
+ 
+
+
+func _on_timer_timeout() -> void:
+	can_mine=  true

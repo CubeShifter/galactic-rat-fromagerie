@@ -38,7 +38,7 @@ func update_chunks() -> void:
 				continue
 			if not chunks.has(chunk_pos):
 				generate_chunk(chunk_pos)
-				print(chunk_pos)
+				
 
 	var to_remove: Array = []
 	for chunk_pos in chunks.keys():
@@ -68,7 +68,7 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 			var atlas_x: int
 			var durability: float
 			
-			print(chunk_pos.y)
+			
 			if num > 0.70:
 				atlas_x = 5
 				durability = INF
@@ -136,7 +136,7 @@ func destroy_tile(pos: Vector2) -> int:
 	if chunks[chunk_pos][idx] == INF:
 		return -1
 
-	chunks[chunk_pos][idx] -= 1.0
+	chunks[chunk_pos][idx] -= 1.0 + Global.upgrades["Mining Speed"]
 
 	if chunks[chunk_pos][idx] <= 0.0:
 		var atlas_coords := get_cell_atlas_coords(tile_pos)
