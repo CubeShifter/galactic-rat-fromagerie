@@ -63,7 +63,7 @@ func handle_jump():
 			velocity.x = -WALL_JUMP_X
 
 
-# MINING 
+# MINING
 func handle_mining():
 	if not Input.is_action_just_pressed("dig"):
 		return
