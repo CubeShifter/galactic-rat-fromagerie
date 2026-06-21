@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://b7uuvowjsfpsg" path="res://scripts/tilemap.gd" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cu3erpap4rayi" path="res://asset/Stars.png" id="5_iywne"]
 [ext_resource type="Script" uid="uid://w71enuwtp72n" path="res://scenes/timer.gd" id="9_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://ctgb4y4x381ls" path="res://asset/home.png" id="10_vtaks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -55,6 +56,9 @@ shader_parameter/corner_radius = 0.01
 shader_parameter/border_thickness_horizontal = 0.006
 shader_parameter/border_thickness_vertical = 0.008
 shader_parameter/border_smoothness = 0.002
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tq6n8"]
+size = Vector2(147, 129)
 
 [node name="game" type="Node2D" unique_id=936657624]
 
@@ -159,5 +163,20 @@ stretch_mode = 1
 
 [node name="Timer" type="Timer" parent="." unique_id=36934461]
 wait_time = 120.0
+one_shot = true
 autostart = true
 script = ExtResource("9_0tnpc")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=267147387]
+offset_left = -168.0
+offset_top = -128.0
+offset_right = -104.0
+offset_bottom = -64.0
+scale = Vector2(2, 2)
+texture = ExtResource("10_vtaks")
+
+[node name="home" type="Area2D" parent="." unique_id=737093072]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="home" unique_id=1433477573]
+position = Vector2(-97.5, -64.5)
+shape = SubResource("RectangleShape2D_tq6n8")
