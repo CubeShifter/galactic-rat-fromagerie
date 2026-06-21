@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cu2tdbuyku46q"]
 
+[ext_resource type="Script" uid="uid://cmkd0g2oanhwh" path="res://scripts/shop.gd" id="1_2fc2m"]
 [ext_resource type="Texture2D" uid="uid://cu3erpap4rayi" path="res://asset/Stars.png" id="1_lx5au"]
 [ext_resource type="Shader" uid="uid://dd16uorakpohr" path="res://vhs.gdshader" id="2_xfvoa"]
 [ext_resource type="Texture2D" uid="uid://c7xnpc0ekfy5p" path="res://asset/Shop.png" id="3_1l46r"]
@@ -30,6 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
+script = ExtResource("1_2fc2m")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1610205646]
 z_index = -2

@@ -1,7 +1,7 @@
 extends Node2D
 
 var tile_map_layer: TileMapLayer
-var radius: int = 2
+var radius: int = 7
 
 @onready var fuse_timer: Timer = $FuseTimer
 @onready var label: Label = $Label
@@ -18,9 +18,7 @@ func _ready() -> void:
 		anim.play(anim.sprite_frames.get_animation_names()[0])
 
 
-func _process(_delta: float) -> void:
-	var t := fuse_timer.time_left
-	label.text = "%.1f" % t
+
 
 
 func _explode() -> void:

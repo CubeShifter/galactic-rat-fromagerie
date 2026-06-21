@@ -13,6 +13,7 @@ var dir := -1
 var can_mine = true
 var cheese := [0,0,0,0,0]
 var jump_buffer := 0
+var bombs = Global.upgrades["Bombs"] * 5
 
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
@@ -103,12 +104,13 @@ func get_mine_offset() -> Vector2:
 
 
 func handle_bomb() -> void:
-	if not Input.is_action_just_pressed("bomb"):
+	if not Input.is_action_just_pressed("bomb") or not bombs:
 		return
 	var bomb = BombScene.instantiate()
+	bombs -= 1
 	bomb.position = position
 	bomb.tile_map_layer = tile_map_layer
-	bomb.radius = 2 + Global.upgrades["Bombs"]
+	bomb.radius = 4 + Global.upgrades["Bombs"]
 	get_parent().add_child(bomb)
 
 
