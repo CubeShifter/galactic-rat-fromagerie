@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bd8dny2o5wcuu"]
 
 [ext_resource type="PackedScene" uid="uid://bay2dhi37q48n" path="res://scenes/player.tscn" id="1_2wrtc"]
-[ext_resource type="Shader" uid="uid://dd16uorakpohr" path="res://vhs.gdshader" id="1_lbhrr"]
+[ext_resource type="Shader" path="res://vhs.gdshader" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cstggcddsqxpw" path="res://asset/CheeseTable.png" id="1_p57ef"]
 [ext_resource type="FontFile" uid="uid://bdl5irbsh5i2b" path="res://asset/tuff fint.ttf" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://3jnipqps3pq" path="res://asset/MoldyCheese1.png" id="2_yqjtg"]
@@ -48,7 +48,7 @@ shader_parameter/convergence_intensity = 0.02000000095
 shader_parameter/halation_intensity = 0.23999999463552
 shader_parameter/halation_radius = 2.0
 shader_parameter/tv_brightness = -0.1
-shader_parameter/tv_contrast = 1.1999999731775999
+shader_parameter/tv_contrast = 1.1999999731776
 shader_parameter/tv_saturation = 0.75
 shader_parameter/vignette_intensity = 0.73999998345952
 shader_parameter/vignette_smoothness = 0.66999998502416

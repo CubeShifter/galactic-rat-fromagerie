@@ -6,7 +6,8 @@ func _ready() -> void:
 	
 	var _timer_in_progress = false
 	
-	start(0)
+	wait_time = 180
+	start()
 	
 	pass # Replace with function body.
 
@@ -18,4 +19,4 @@ func _process(delta: float) -> void:
 
 
 func _on_timeout() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://scenes/shop.tscn")
