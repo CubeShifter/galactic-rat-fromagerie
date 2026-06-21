@@ -69,13 +69,13 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 			var durability: float
 			
 			print(chunk_pos.y)
-			if num > 0.9:
+			if num > 0.80:
 				atlas_x = 5
 				durability = INF
-			elif num > 0.75:
+			elif num > 0.70:
 				atlas_x = clamp(layer-1,0,4 )
 				durability = pow(2,clamp(layer-1,0,4 ))
-			elif num>0.15:
+			elif num>0.10:
 				atlas_x =  clamp(layer,0,4 )
 				durability = pow(2,clamp(layer,0,4 ))
 			else:
