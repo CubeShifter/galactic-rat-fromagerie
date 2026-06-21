@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c7xnpc0ekfy5p" path="res://asset/Shop.png" id="3_1l46r"]
 [ext_resource type="FontFile" uid="uid://bdl5irbsh5i2b" path="res://asset/tuff fint.ttf" id="4_032fp"]
 [ext_resource type="Texture2D" uid="uid://c16u7c7evauuy" path="res://asset/cheesez.png" id="6_8r1wq"]
+[ext_resource type="Texture2D" uid="uid://bm0k7j5i57fqr" path="res://asset/texture.png" id="6_ajxib"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1l46r"]
 shader = ExtResource("2_xfvoa")
@@ -95,6 +96,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
+mouse_filter = 2
 script = ExtResource("1_2fc2m")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1610205646]
@@ -104,18 +106,21 @@ offset_left = -473.0
 offset_top = -311.0
 offset_right = 810.0
 offset_bottom = 508.0
+mouse_filter = 2
 texture = ExtResource("1_lx5au")
 stretch_mode = 1
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2010153557]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=746485049]
+visible = false
 material = SubResource("ShaderMaterial_1l46r")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1884089116]
 layout_mode = 0
@@ -123,6 +128,7 @@ offset_left = 10.0
 offset_top = 15.0
 offset_right = 310.0
 offset_bottom = 165.0
+mouse_filter = 2
 texture = ExtResource("3_1l46r")
 
 [node name="Control" type="Control" parent="." unique_id=963769496]
@@ -196,17 +202,20 @@ offset_left = 120.0
 offset_top = 20.0
 offset_right = 1076.0
 offset_bottom = 110.0
+mouse_filter = 2
 
 [node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer" unique_id=436205263]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Speed I"
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel1" unique_id=1677005071]
+[node name="TextureButton1" type="TextureButton" parent="HBoxContainer/RichTextLabel1" unique_id=490313908]
+z_index = 20
 layout_mode = 0
 offset_right = 142.0
 offset_bottom = 16.0
@@ -223,6 +232,7 @@ offset_left = 100.0
 offset_top = 1.5
 offset_right = 160.0
 offset_bottom = 17.5
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
@@ -232,16 +242,18 @@ text = "[right]20"
 [node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer" unique_id=1723822737]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Mining Speed I"
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel2" unique_id=299167710]
+[node name="TextureButton2" type="TextureButton" parent="HBoxContainer/RichTextLabel2" unique_id=299167710]
 layout_mode = 0
 offset_right = 142.0
 offset_bottom = 16.0
+texture_normal = ExtResource("6_ajxib")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel2" unique_id=1967691239]
 position = Vector2(170, 8)
@@ -255,6 +267,7 @@ offset_left = 100.0
 offset_top = 1.5
 offset_right = 160.0
 offset_bottom = 17.5
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
@@ -264,16 +277,18 @@ text = "[right]25"
 [node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer" unique_id=1077347647]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Bombs I"
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel3" unique_id=313865032]
+[node name="TextureButton3" type="TextureButton" parent="HBoxContainer/RichTextLabel3" unique_id=313865032]
 layout_mode = 0
 offset_right = 142.0
 offset_bottom = 16.0
+texture_normal = ExtResource("6_ajxib")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel3" unique_id=1581041140]
 position = Vector2(170, 8)
@@ -287,6 +302,7 @@ offset_left = 100.0
 offset_top = 1.5
 offset_right = 160.0
 offset_bottom = 17.5
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
@@ -296,16 +312,18 @@ text = "[right]30"
 [node name="RichTextLabel4" type="RichTextLabel" parent="HBoxContainer" unique_id=577598604]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Time I"
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel4" unique_id=1049161228]
+[node name="TextureButton4" type="TextureButton" parent="HBoxContainer/RichTextLabel4" unique_id=1049161228]
 layout_mode = 0
 offset_right = 142.0
 offset_bottom = 16.0
+texture_normal = ExtResource("6_ajxib")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel4" unique_id=1799071178]
 position = Vector2(170, 8)
@@ -319,6 +337,7 @@ offset_left = 100.0
 offset_top = 1.5
 offset_right = 160.0
 offset_bottom = 17.5
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
@@ -328,16 +347,18 @@ text = "[right]35"
 [node name="RichTextLabel5" type="RichTextLabel" parent="HBoxContainer" unique_id=630319253]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Drill I"
 
-[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel5" unique_id=1906571800]
+[node name="TextureButton5" type="TextureButton" parent="HBoxContainer/RichTextLabel5" unique_id=1906571800]
 layout_mode = 0
 offset_right = 142.0
 offset_bottom = 16.0
+texture_normal = ExtResource("6_ajxib")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel5" unique_id=527840277]
 position = Vector2(170, 8)
@@ -351,8 +372,36 @@ offset_left = 100.0
 offset_top = 1.5
 offset_right = 160.0
 offset_bottom = 17.5
+mouse_filter = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[right]45"
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="." unique_id=725896682]
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 0
+offset_left = 174.0
+offset_top = 139.5
+offset_right = 238.0
+offset_bottom = 155.5
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Next Day"
+
+[node name="profanity" type="TextureButton" parent="RichTextLabel1" unique_id=19133227]
+z_index = 20
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 16.0
+
+[connection signal="pressed" from="HBoxContainer/RichTextLabel1/TextureButton1" to="." method="_on_texture_button_1_pressed"]
+[connection signal="pressed" from="HBoxContainer/RichTextLabel2/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/RichTextLabel3/TextureButton3" to="." method="_on_texture_button_3_pressed"]
+[connection signal="pressed" from="HBoxContainer/RichTextLabel4/TextureButton4" to="." method="_on_texture_button_4_pressed"]
+[connection signal="pressed" from="HBoxContainer/RichTextLabel5/TextureButton5" to="." method="_on_texture_button_5_pressed"]
+[connection signal="pressed" from="RichTextLabel1/profanity" to="." method="_on_profanity_pressed"]
