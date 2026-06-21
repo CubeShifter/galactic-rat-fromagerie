@@ -98,6 +98,30 @@ func unload_chunk(chunk_pos: Vector2i) -> void:
 	chunks.erase(chunk_pos)
 
 
+func explode_at(world_pos: Vector2, radius: int) -> Array:
+	var center := local_to_map(world_pos)
+	var collected := [0, 0, 0, 0, 0]
+	for dy in range(-radius, radius + 1):
+		for dx in range(-radius, radius + 1):
+			if dx * dx + dy * dy > radius * radius:
+				continue
+			var tile_pos := center + Vector2i(dx, dy)
+			var chunk_pos := world_to_chunk(tile_pos)
+			if not chunks.has(chunk_pos):
+				continue
+			var local_x := ((tile_pos.x % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE
+			var local_y := ((tile_pos.y % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE
+			var idx := local_y * CHUNK_SIZE + local_x
+			if chunks[chunk_pos][idx] == INF:
+				continue
+			var atlas_x := get_cell_atlas_coords(tile_pos).x
+			erase_cell(tile_pos)
+			chunks[chunk_pos][idx] = 0.0
+			if atlas_x >= 0 and atlas_x < 5:
+				collected[atlas_x] += 1
+	return collected
+
+
 func destroy_tile(pos: Vector2) -> int:
 	var tile_pos := local_to_map(pos)
 	var chunk_pos := world_to_chunk(tile_pos)

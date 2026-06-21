@@ -7,9 +7,12 @@ const WALL_JUMP_X = 180
 var MOVE_SPEED = 80 + Global.upgrades["Move Speed"] * 10
 const GRAVITY = 600
 
+const BombScene = preload("res://scenes/bomb.tscn")
+
 var dir := -1
 var can_mine = true
 var cheese := [0,0,0,0,0]
+var jump_buffer := 0
 
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
@@ -29,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	handle_jump()
 	handle_movement()
 	handle_mining()
+	handle_bomb()
 
 	move_and_slide()
 
@@ -56,16 +60,21 @@ func apply_gravity(delta):
 
 func handle_jump():
 	if Input.is_action_just_pressed("up"):
+		jump_buffer = 8
+
+	if jump_buffer > 0:
+		jump_buffer -= 1
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
-
+			jump_buffer = 0
 		elif left.is_colliding():
 			velocity.y = -225- Global.upgrades["Move Speed"]*13
 			velocity.x = WALL_JUMP_X
-
+			jump_buffer = 0
 		elif right.is_colliding():
 			velocity.y = -225 - Global.upgrades["Move Speed"]*13
 			velocity.x = -WALL_JUMP_X
+			jump_buffer = 0
 
 
 # MINING
@@ -93,8 +102,18 @@ func get_mine_offset() -> Vector2:
 	
 
 
+func handle_bomb() -> void:
+	if not Input.is_action_just_pressed("bomb"):
+		return
+	var bomb = BombScene.instantiate()
+	bomb.position = position
+	bomb.tile_map_layer = tile_map_layer
+	bomb.radius = 2 + Global.upgrades["Bombs"]
+	get_parent().add_child(bomb)
+
+
 func update_ui():
-	
+
 	for i in range(5):
 		v_box_container.get_node(String("RichTextLabel" + str(i+1))).text = str(cheese[i])
 		

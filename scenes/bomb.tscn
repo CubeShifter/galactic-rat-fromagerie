@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bmbscne1234ab"]
+
+[ext_resource type="Script" uid="uid://dn2cer6llli3n" path="res://scripts/bomb.gd" id="1_bomb"]
+[ext_resource type="Texture2D" uid="uid://5gpxhmmig1wm" path="res://asset/bomb-Sheet.png" id="2_vpdcx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j15uc"]
+atlas = ExtResource("2_vpdcx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84slv"]
+atlas = ExtResource("2_vpdcx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4itki"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j15uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84slv")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="bomb" type="Node2D" unique_id=298282909]
+script = ExtResource("1_bomb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=111111111]
+sprite_frames = SubResource("SpriteFrames_4itki")
+
+[node name="FuseTimer" type="Timer" parent="." unique_id=962486992]
+
+[node name="Label" type="Label" parent="." unique_id=828896564]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = -4.0
+text = "2.0"
