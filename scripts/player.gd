@@ -8,6 +8,7 @@ const MOVE_SPEED = 120
 const GRAVITY = 600
 
 var dir := -1
+var can_mine = true
 var cheese := [0,0,0,0,0]
 
 @onready var right: RayCast2D = $Right
@@ -16,6 +17,7 @@ var cheese := [0,0,0,0,0]
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
 @onready var cheese_label: RichTextLabel = $"../CanvasLayer/RichTextLabel"
 @onready var v_box_container: VBoxContainer = $"../CanvasLayer3/TextureRect/VBoxContainer"
+@onready var timer: Timer = $Timer
 
 
 
@@ -68,15 +70,16 @@ func handle_jump():
 
 # MINING
 func handle_mining():
-	if not Input.is_action_just_pressed("dig"):
+	if not Input.is_action_just_pressed("dig") or not can_mine:
 		return
-
+	can_mine = false
 	var offset := get_mine_offset()
 	var mined: int = tile_map_layer.destroy_tile(position + offset)
 
 	if mined >= 0:
 		cheese[mined] += 1
 		update_ui()
+	timer.start()
 		
 
 
@@ -87,6 +90,7 @@ func get_mine_offset() -> Vector2:
 		return Vector2(0, -16)
 	else:
 		return Vector2(dir * 16, 0)
+	
 
 
 func update_ui():
@@ -95,3 +99,7 @@ func update_ui():
 		v_box_container.get_node(String("RichTextLabel" + str(i+1))).text = str(cheese[i])
 		
  
+
+
+func _on_timer_timeout() -> void:
+	can_mine=  true
