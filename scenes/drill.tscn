@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ds167r7l8kgm1"]
+
+[ext_resource type="Script" uid="uid://bgouya77g85yl" path="res://scenes/drill.gd" id="1_vm0cf"]
+
+[node name="Drill" type="Node2D" unique_id=194263147]
+script = ExtResource("1_vm0cf")

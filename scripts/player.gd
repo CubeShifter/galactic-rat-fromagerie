@@ -8,12 +8,14 @@ var MOVE_SPEED = 80 + Global.upgrades["Speed"] * 10
 const GRAVITY = 600
 
 const BombScene = preload("res://scenes/bomb.tscn")
+const DrillScene = preload("res://scenes/drill.tscn")
 
 var dir := -1
 var can_mine = true
 var cheese := [0,0,0,0,0]
 var jump_buffer := 0
-var bombs = Global.upgrades["Bombs"] * 5
+var bombs = Global.upgrades["Bombs"]
+var drills = Global.upgrades["Drills"]
 
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
@@ -34,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	handle_movement()
 	handle_mining()
 	handle_bomb()
+	handle_drill()
 
 	move_and_slide()
 
@@ -113,6 +116,17 @@ func handle_bomb() -> void:
 	bomb.radius = 4 + Global.upgrades["Bombs"]
 	get_parent().add_child(bomb)
 
+
+func handle_drill() -> void:
+	if not Input.is_action_just_pressed("drill") or not drills:
+		return
+	var drill = DrillScene.instantiate()
+	drills -= 1
+	drill.position = position
+	drill.tile_map_layer = tile_map_layer
+	drill.durability = 16.0  # tune this
+	get_parent().add_child(drill)
+	
 
 func update_ui():
 

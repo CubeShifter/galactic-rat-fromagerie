@@ -12,19 +12,14 @@ func _ready() -> void:
 	fuse_timer.one_shot = true
 	fuse_timer.timeout.connect(_explode)
 	fuse_timer.start()
-	if anim.sprite_frames and anim.sprite_frames.has_animation("idle"):
-		anim.play("idle")
-	elif anim.sprite_frames:
-		anim.play(anim.sprite_frames.get_animation_names()[0])
+
+	anim.play(anim.sprite_frames.get_animation_names()[0])
 
 
 
 
 
 func _explode() -> void:
-	if anim.sprite_frames and anim.sprite_frames.has_animation("explode"):
-		anim.play("explode")
-		await anim.animation_finished
 	if tile_map_layer:
 		var collected: Array = tile_map_layer.explode_at(position, radius)
 		var player = tile_map_layer.player

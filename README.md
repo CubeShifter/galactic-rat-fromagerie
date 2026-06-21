@@ -1,4 +1,4 @@
-### _**Welcome to the**_
+### _**Welcome to the...**_
 # Galactic Rat Fromagerie
 
 You have just been recruited by _**Galactic Cheese-Mining Enterprises™**_, the primary producer and distributor of cheese in the Rattus Caseum region of the known universe.
@@ -19,7 +19,10 @@ Unfortunately for you, due to global warming on the moon, the temperature each n
 # What is this?
 This is a game that was made in 3 days by @avycado13, @CubeShifter, and @Coding-Koala222 for the [Hack Cub Horizons Nexus Hackathon](https://web.archive.org/web/20260621190236/https://nexus.hackclub.com/) in 2026.
 
-<br>
+![game screenshot](screenshot.png)
+
+
+# How can I play it?
 
 <picture>
   <img src="itchio-logo.png" alt="itch.io logo" style="width:10%;">
