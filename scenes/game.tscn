@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bd8dny2o5wcuu"]
+[gd_scene format=3 uid="uid://bd8dny2o5wcuu"]
 
 [ext_resource type="PackedScene" uid="uid://bay2dhi37q48n" path="res://scenes/player.tscn" id="1_2wrtc"]
 [ext_resource type="Texture2D" uid="uid://3jnipqps3pq" path="res://asset/MoldyCheese1.png" id="2_yqjtg"]
@@ -33,10 +33,15 @@ limit_enabled = false
 position_smoothing_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1438268485]
-tile_map_data = PackedByteArray("AAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAD+/wEAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wIAAAAAAAAAAAD+/wIAAAAAAAAAAAD//wIAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAACAAEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD7/wEAAAAAAAAAAAD7/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD+/wMAAAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wMAAAAAAAAAAAD6/wMAAAAAAAAAAAD6/wIAAAAAAAAAAAD6/wEAAAAAAAAAAAD6/wQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_tq6n8")
 script = ExtResource("3_lnu2h")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=336357123]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=333433662]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=336357123]
+z_index = 5
+offset_left = -146.0
+offset_top = -91.0
+offset_right = -106.0
+offset_bottom = -51.0
+text = "0"

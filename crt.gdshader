@@ -23,10 +23,10 @@ uniform float border_smoothness : hint_range(0.0, 0.1, 0.001) = 0.002;
 void fragment() {
     vec2 base_uv = UV;
     vec2 pixel_size = TEXTURE_PIXEL_SIZE;
-	
+
     vec2 center_uv = base_uv - vec2(0.5);
-    float dist_sq = dot(center_uv, center_uv); 
-    
+    float dist_sq = dot(center_uv, center_uv);
+
     // edge convergence
     vec2 convergence_offset = center_uv * dist_sq * convergence_intensity;
     float r = texture(TEXTURE, base_uv + convergence_offset).r;
@@ -42,7 +42,7 @@ void fragment() {
     bloom += texture(TEXTURE, base_uv - vec2(blur_step.x, 0.0)).rgb * 0.241732;
     bloom += texture(TEXTURE, base_uv + vec2(0.0, blur_step.y)).rgb * 0.060598;
     bloom += texture(TEXTURE, base_uv - vec2(0.0, blur_step.y)).rgb * 0.060598;
-    
+
     vec3 final_color = base_color + (bloom * halation_intensity);
 
     // virtual tv settings
