@@ -38,6 +38,7 @@ func update_chunks() -> void:
 				continue
 			if not chunks.has(chunk_pos):
 				generate_chunk(chunk_pos)
+				print(chunk_pos)
 
 	var to_remove: Array = []
 	for chunk_pos in chunks.keys():
@@ -55,7 +56,8 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash("%d,%d" % [chunk_pos.x, chunk_pos.y]) ^ WORLD_SEED
-
+	var layer = chunk_pos.y
+	
 	for local_y in range(CHUNK_SIZE):
 		for local_x in range(CHUNK_SIZE):
 			var tile_pos := Vector2i(
@@ -65,16 +67,20 @@ func generate_chunk(chunk_pos: Vector2i) -> void:
 			var num := rng.randf()
 			var atlas_x: int
 			var durability: float
-
+			
+			print(chunk_pos.y)
 			if num > 0.9:
-				atlas_x = 2
+				atlas_x = 5
 				durability = INF
-			elif num > 0.7:
-				atlas_x = 1
-				durability = 2.0
+			elif num > 0.75:
+				atlas_x = clamp(layer-1,0,4 )
+				durability = pow(2,clamp(layer-1,0,4 ))
+			elif num>0.15:
+				atlas_x =  clamp(layer,0,4 )
+				durability = pow(2,clamp(layer,0,4 ))
 			else:
-				atlas_x = 0
-				durability = 1.0
+				atlas_x =  clamp(layer+1,0,4 )
+				durability = pow(2,clamp(layer+1,0,4 ))
 
 			set_cell(tile_pos, 0, Vector2i(atlas_x, 0))
 			data[local_y * CHUNK_SIZE + local_x] = durability

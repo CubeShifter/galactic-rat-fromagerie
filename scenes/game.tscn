@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bd8dny2o5wcuu"]
 
 [ext_resource type="PackedScene" uid="uid://bay2dhi37q48n" path="res://scenes/player.tscn" id="1_2wrtc"]
+[ext_resource type="Shader" uid="uid://dd16uorakpohr" path="res://vhs.gdshader" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://3jnipqps3pq" path="res://asset/MoldyCheese1.png" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://b7uuvowjsfpsg" path="res://scripts/tilemap.gd" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cu3erpap4rayi" path="res://asset/Stars.png" id="5_iywne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -14,6 +16,18 @@ texture = ExtResource("2_yqjtg")
 1:0/0/custom_data_0 = 5
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_tq6n8"]
 physics_layer_0/collision_layer = 1
@@ -21,7 +35,48 @@ custom_data_layer_0/name = "Durability"
 custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6r0q6"]
+shader = ExtResource("1_lbhrr")
+shader_parameter/mask_density = 128.0
+shader_parameter/mask_intensity = 0.12999999709424
+shader_parameter/convergence_intensity = 0.0110000005225
+shader_parameter/halation_intensity = 0.23999999463552
+shader_parameter/halation_radius = 2.0
+shader_parameter/tv_brightness = -0.1
+shader_parameter/tv_contrast = 1.25
+shader_parameter/tv_saturation = 0.75
+shader_parameter/vignette_intensity = 0.73999998345952
+shader_parameter/vignette_smoothness = 0.66999998502416
+shader_parameter/corner_radius = 0.01
+shader_parameter/border_thickness_horizontal = 0.006
+shader_parameter/border_thickness_vertical = 0.008
+shader_parameter/border_smoothness = 0.002
+
 [node name="game" type="Node2D" unique_id=936657624]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=333433662]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=336357123]
+z_index = 5
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 40.0
+text = "0"
+
+[node name="BoxContainer" type="BoxContainer" parent="CanvasLayer" unique_id=1370521700]
+offset_left = 17.0
+offset_top = -44.0
+offset_right = 96.0
+offset_bottom = -6.0
+
+[node name="Label" type="Label" parent="CanvasLayer/BoxContainer" unique_id=1403201705]
+layout_mode = 2
+text = "Hello!"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1438268485]
+tile_set = SubResource("TileSet_tq6n8")
+script = ExtResource("3_lnu2h")
 
 [node name="player" parent="." unique_id=180119122 instance=ExtResource("1_2wrtc")]
 position = Vector2(8, -16)
@@ -30,45 +85,26 @@ position = Vector2(8, -16)
 position = Vector2(0, 4)
 zoom = Vector2(2, 2)
 limit_enabled = false
+position_smoothing_enabled = true
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1438268485]
-tile_set = SubResource("TileSet_tq6n8")
-script = ExtResource("3_lnu2h")
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1089552940]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=333433662]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=480430839]
+material = SubResource("ShaderMaterial_6r0q6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=336357123]
-z_index = 5
-offset_left = 49.0
-offset_top = 96.0
-offset_right = 137.0
-offset_bottom = 136.0
-text = "0"
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=995216020]
+scroll_scale = Vector2(0.1, 0.1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=17856393]
-offset_left = 40.0
-offset_top = 19.0
-offset_right = 119.0
-offset_bottom = 57.0
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" unique_id=614123220]
-layout_mode = 2
-
-[node name="Cheddar_label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer" unique_id=1403201705]
-layout_mode = 2
-text = "Cheddar:"
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/VBoxContainer" unique_id=1838354442]
-layout_mode = 2
-
-[node name="Cheddar_count" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer" unique_id=1245328329]
-layout_mode = 2
-text = "25"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" unique_id=1657167219]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=1197895420]
-layout_mode = 2
-text = "Cheddar:"
+[node name="TextureRect" type="TextureRect" parent="Parallax2D" unique_id=1010320043]
+z_index = -2
+offset_left = -476.0
+offset_top = -311.0
+offset_right = 807.0
+offset_bottom = 508.0
+texture = ExtResource("5_iywne")
+stretch_mode = 1
