@@ -39,19 +39,36 @@ script = ExtResource("3_lnu2h")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=336357123]
 z_index = 5
-offset_left = 186.0
-offset_top = 18.0
-offset_right = 226.0
-offset_bottom = 58.0
+offset_left = 49.0
+offset_top = 96.0
+offset_right = 137.0
+offset_bottom = 136.0
 text = "0"
 
-[node name="BoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=17856393]
-offset_left = 20.0
-offset_top = 15.0
-offset_right = 99.0
-offset_bottom = 53.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=17856393]
+offset_left = 40.0
+offset_top = 19.0
+offset_right = 119.0
+offset_bottom = 57.0
 alignment = 1
 
-[node name="Label" type="Label" parent="CanvasLayer/BoxContainer" unique_id=1403201705]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" unique_id=614123220]
 layout_mode = 2
-text = "Hello!"
+
+[node name="Cheddar_label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer" unique_id=1403201705]
+layout_mode = 2
+text = "Cheddar:"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HBoxContainer/VBoxContainer" unique_id=1838354442]
+layout_mode = 2
+
+[node name="Cheddar_count" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer" unique_id=1245328329]
+layout_mode = 2
+text = "25"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" unique_id=1657167219]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=1197895420]
+layout_mode = 2
+text = "Cheddar:"
