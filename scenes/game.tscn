@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cstggcddsqxpw" path="res://asset/CheeseTable.png" id="1_p57ef"]
 [ext_resource type="FontFile" uid="uid://bdl5irbsh5i2b" path="res://asset/tuff fint.ttf" id="2_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://3jnipqps3pq" path="res://asset/MoldyCheese1.png" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://dx67rngtmtifr" path="res://asset/Time.png" id="3_gee14"]
 [ext_resource type="Script" uid="uid://b7uuvowjsfpsg" path="res://scripts/tilemap.gd" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://cu3erpap4rayi" path="res://asset/Stars.png" id="5_iywne"]
+[ext_resource type="Script" uid="uid://w71enuwtp72n" path="res://scenes/timer.gd" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -40,12 +42,12 @@ sources/0 = SubResource("TileSetAtlasSource_lnu2h")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6r0q6"]
 shader = ExtResource("1_lbhrr")
 shader_parameter/mask_density = 128.0
-shader_parameter/mask_intensity = 0.12999999709424
-shader_parameter/convergence_intensity = 0.0110000005225
+shader_parameter/mask_intensity = 0.0999999977648
+shader_parameter/convergence_intensity = 0.02000000095
 shader_parameter/halation_intensity = 0.23999999463552
 shader_parameter/halation_radius = 2.0
 shader_parameter/tv_brightness = -0.1
-shader_parameter/tv_contrast = 1.25
+shader_parameter/tv_contrast = 1.1999999731775999
 shader_parameter/tv_saturation = 0.75
 shader_parameter/vignette_intensity = 0.73999998345952
 shader_parameter/vignette_smoothness = 0.66999998502416
@@ -104,6 +106,22 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_u5sy4")
 text = "1920"
 
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer3" unique_id=868076113]
+offset_left = 14.0
+offset_top = 13.0
+offset_right = 46.0
+offset_bottom = 29.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_gee14")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer3/TextureRect2" unique_id=99228934]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_fonts/normal_font = ExtResource("2_u5sy4")
+bbcode_enabled = true
+text = "[center]11"
+
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1438268485]
 tile_set = SubResource("TileSet_tq6n8")
 script = ExtResource("3_lnu2h")
@@ -138,3 +156,8 @@ offset_right = 810.0
 offset_bottom = 508.0
 texture = ExtResource("5_iywne")
 stretch_mode = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=36934461]
+wait_time = 120.0
+autostart = true
+script = ExtResource("9_0tnpc")
