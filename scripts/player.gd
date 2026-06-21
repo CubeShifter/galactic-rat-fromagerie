@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 enum CheeseType { SOFT = 0, HARD = 1 }
 
-const JUMP_VELOCITY = -325
+const JUMP_VELOCITY = -275
 const WALL_JUMP_X = 180
 const MOVE_SPEED = 120
 const GRAVITY = 600
@@ -58,11 +58,11 @@ func handle_jump():
 			velocity.y = JUMP_VELOCITY
 
 		elif left.is_colliding():
-			velocity.y = -275
+			velocity.y = -225
 			velocity.x = WALL_JUMP_X
 
 		elif right.is_colliding():
-			velocity.y = -275
+			velocity.y = -225
 			velocity.x = -WALL_JUMP_X
 
 
