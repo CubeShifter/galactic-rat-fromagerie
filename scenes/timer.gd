@@ -4,8 +4,7 @@ extends Timer
 @onready var home: Area2D = $"../home"
 @onready var player: CharacterBody2D = $"../player"
 
-func _ready() -> void:
-	wait_time = 10 + Global.upgrades["Time"] * 15
+
 
 func _process(_delta: float) -> void:
 	var seconds := int(time_left)
