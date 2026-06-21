@@ -7,9 +7,8 @@ var cheese := 0
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
 @onready var sprite: AnimatedSprite2D = $sprite
-@onready var cheese_label: RichTextLabel = $"../RichTextLabel"
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer" #Loads two other noads, the players sprite and the tilemap.
-@onready var rich_text_label: RichTextLabel = $"../CanvasLayer/RichTextLabel"
+@onready var cheese_label: RichTextLabel = $"../CanvasLayer/RichTextLabel"
 
 
 func update_ui():
@@ -29,7 +28,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 
 	
-	if Input.is_action_pressed("ui_left"): #Left and right movement
 
 	# Gravity
 	if not is_on_floor():
@@ -92,5 +90,5 @@ func _physics_process(delta: float) -> void:
 	print(cheese)
 
 	tile_map_layer.destroy_tile(position + dir * Vector2(16, 0))
-	rich_text_label.text = str(cheese)
+	cheese_label.text = str(cheese)
 	move_and_slide()
