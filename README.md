@@ -28,7 +28,7 @@ This is a game that was made in 3 days by @avycado13, @CubeShifter, and @Coding-
   <img src="itchio-logo.png" alt="itch.io logo" style="width:10%;">
 </picture>
 
-It is available to [play on itch.io here](https://itch.io/).
+It is available to [play on itch.io here](https://avycado13.itch.io/galactic-rat-fromagerie).
 
 # Credits
 - Made with [Godot](https://github.com/godotengine/godot)
