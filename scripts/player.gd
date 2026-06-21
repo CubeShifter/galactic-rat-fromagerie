@@ -89,5 +89,4 @@ func get_mine_offset() -> Vector2:
 
 # UI
 func update_ui():
-	cheese_label.bbcode_enabled = true
-	cheese_label.text = "🧀 %d  🧀🧀 %d" % [cheese[CheeseType.SOFT], cheese[CheeseType.HARD]]
+	cheese_label.text = "Normal: %d  Moldy: %d" % [cheese[CheeseType.SOFT], cheese[CheeseType.HARD]]
