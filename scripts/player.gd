@@ -9,6 +9,7 @@ const GRAVITY = 600
 
 var dir := -1
 var cheese := {CheeseType.SOFT: 0, CheeseType.HARD: 0}
+var fridgeContents := {CheeseType.SOFT: 0, CheeseType.HARD: 0}
 
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
