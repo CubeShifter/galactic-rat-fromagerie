@@ -40,8 +40,8 @@ script = ExtResource("3_lnu2h")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=336357123]
 z_index = 5
-offset_left = -146.0
-offset_top = -91.0
-offset_right = -106.0
-offset_bottom = -51.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 40.0
 text = "0"

@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
+enum CheeseType { SOFT = 0, HARD = 1 }
+
 const JUMP_VELOCITY = -325
 const WALL_JUMP_X = 180
 const MOVE_SPEED = 120
 const GRAVITY = 600
 
 var dir := -1
-var cheese := 0
+var cheese := {CheeseType.SOFT: 0, CheeseType.HARD: 0}
 
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
@@ -69,10 +71,10 @@ func handle_mining():
 		return
 
 	var offset := get_mine_offset()
-	var mined: bool = tile_map_layer.destroy_tile(position + offset)
+	var mined: int = tile_map_layer.destroy_tile(position + offset)
 
-	if mined:
-		cheese += 1
+	if mined >= 0:
+		cheese[mined] += 1
 		update_ui()
 
 
@@ -88,4 +90,4 @@ func get_mine_offset() -> Vector2:
 # UI
 func update_ui():
 	cheese_label.bbcode_enabled = true
-	cheese_label.text = "[center]🧀 %d[/center]" % cheese
+	cheese_label.text = "🧀 %d  🧀🧀 %d" % [cheese[CheeseType.SOFT], cheese[CheeseType.HARD]]

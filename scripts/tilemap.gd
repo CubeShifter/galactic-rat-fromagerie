@@ -26,16 +26,16 @@ func make_map():
 				tiles[i].append(1)
 			
 func destroy_tile(pos):
-	
 	var tile_pos = local_to_map(pos)
-	print(pos,tile_pos)
-	
-	tiles[tile_pos.y][tile_pos.x+50] -= 1
+	print(pos, tile_pos)
 
-	if tiles[tile_pos.y ][tile_pos.x+50] == 0:
+	tiles[tile_pos.y][tile_pos.x + 50] -= 1
+
+	if tiles[tile_pos.y][tile_pos.x + 50] == 0:
+		var atlas_coords = get_cell_atlas_coords(tile_pos)
 		erase_cell(tile_pos)
 		print(tile_pos)
-		return true
-	return false
+		return atlas_coords.x
+	return -1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
