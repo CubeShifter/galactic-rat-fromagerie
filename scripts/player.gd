@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 enum CheeseType { SOFT = 0, HARD = 1 }
 
-var JUMP_VELOCITY = -275 - Global.upgrades["Move Speed"]*13
+var JUMP_VELOCITY = -275 - Global.upgrades["Speed"]*13
 const WALL_JUMP_X = 180
-var MOVE_SPEED = 80 + Global.upgrades["Move Speed"] * 10
+var MOVE_SPEED = 80 + Global.upgrades["Speed"] * 10
 const GRAVITY = 600
 
 const BombScene = preload("res://scenes/bomb.tscn")
@@ -72,11 +72,11 @@ func handle_jump():
 			velocity.y = JUMP_VELOCITY
 			jump_buffer = 0
 		elif left.is_colliding():
-			velocity.y = -225- Global.upgrades["Move Speed"]*13
+			velocity.y = -225- Global.upgrades["Speed"]*13
 			velocity.x = WALL_JUMP_X
 			jump_buffer = 0
 		elif right.is_colliding():
-			velocity.y = -225 - Global.upgrades["Move Speed"]*13
+			velocity.y = -225 - Global.upgrades["Speed"]*13
 			velocity.x = -WALL_JUMP_X
 			jump_buffer = 0
 

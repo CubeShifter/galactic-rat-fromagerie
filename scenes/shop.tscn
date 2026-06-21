@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://dd16uorakpohr" path="res://vhs.gdshader" id="2_xfvoa"]
 [ext_resource type="Texture2D" uid="uid://c7xnpc0ekfy5p" path="res://asset/Shop.png" id="3_1l46r"]
 [ext_resource type="FontFile" uid="uid://bdl5irbsh5i2b" path="res://asset/tuff fint.ttf" id="4_032fp"]
+[ext_resource type="Texture2D" uid="uid://c16u7c7evauuy" path="res://asset/cheesez.png" id="6_8r1wq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1l46r"]
 shader = ExtResource("2_xfvoa")
@@ -22,6 +23,69 @@ shader_parameter/corner_radius = 0.01
 shader_parameter/border_thickness_horizontal = 0.006
 shader_parameter/border_thickness_vertical = 0.008
 shader_parameter/border_smoothness = 0.002
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajxib"]
+atlas = ExtResource("6_8r1wq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6sft"]
+atlas = ExtResource("6_8r1wq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4ofw"]
+atlas = ExtResource("6_8r1wq")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_heatd"]
+atlas = ExtResource("6_8r1wq")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v8qu"]
+atlas = ExtResource("6_8r1wq")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tq6n8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajxib")
+}],
+"loop": 1,
+"name": &"0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6sft")
+}],
+"loop": 1,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4ofw")
+}],
+"loop": 1,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_heatd")
+}],
+"loop": 1,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v8qu")
+}],
+"loop": 1,
+"name": &"4",
+"speed": 5.0
+}]
 
 [node name="shop" type="Control" unique_id=56448174]
 layout_mode = 3
@@ -142,6 +206,29 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Speed I"
 
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel1" unique_id=1677005071]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel1" unique_id=546453843]
+position = Vector2(170, 8)
+sprite_frames = SubResource("SpriteFrames_tq6n8")
+animation = &"4"
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer/RichTextLabel1" unique_id=2100050355]
+custom_minimum_size = Vector2(60, 16)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.5
+offset_right = 160.0
+offset_bottom = 17.5
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]20"
+
 [node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer" unique_id=1723822737]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
@@ -150,6 +237,29 @@ theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Mining Speed I"
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel2" unique_id=299167710]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel2" unique_id=1967691239]
+position = Vector2(170, 8)
+sprite_frames = SubResource("SpriteFrames_tq6n8")
+animation = &"4"
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer/RichTextLabel2" unique_id=1423167481]
+custom_minimum_size = Vector2(60, 16)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.5
+offset_right = 160.0
+offset_bottom = 17.5
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]25"
 
 [node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer" unique_id=1077347647]
 custom_minimum_size = Vector2(236, 16)
@@ -160,6 +270,29 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Bombs I"
 
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel3" unique_id=313865032]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel3" unique_id=1581041140]
+position = Vector2(170, 8)
+sprite_frames = SubResource("SpriteFrames_tq6n8")
+animation = &"4"
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer/RichTextLabel3" unique_id=964245497]
+custom_minimum_size = Vector2(60, 16)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.5
+offset_right = 160.0
+offset_bottom = 17.5
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]30"
+
 [node name="RichTextLabel4" type="RichTextLabel" parent="HBoxContainer" unique_id=577598604]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
@@ -169,6 +302,29 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Time I"
 
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel4" unique_id=1049161228]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel4" unique_id=1799071178]
+position = Vector2(170, 8)
+sprite_frames = SubResource("SpriteFrames_tq6n8")
+animation = &"4"
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer/RichTextLabel4" unique_id=915839283]
+custom_minimum_size = Vector2(60, 16)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.5
+offset_right = 160.0
+offset_bottom = 17.5
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]35"
+
 [node name="RichTextLabel5" type="RichTextLabel" parent="HBoxContainer" unique_id=630319253]
 custom_minimum_size = Vector2(236, 16)
 layout_mode = 2
@@ -177,3 +333,26 @@ theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Drill I"
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer/RichTextLabel5" unique_id=1906571800]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/RichTextLabel5" unique_id=527840277]
+position = Vector2(170, 8)
+sprite_frames = SubResource("SpriteFrames_tq6n8")
+animation = &"4"
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer/RichTextLabel5" unique_id=219020630]
+custom_minimum_size = Vector2(60, 16)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 1.5
+offset_right = 160.0
+offset_bottom = 17.5
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]45"

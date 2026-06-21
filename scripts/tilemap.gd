@@ -136,7 +136,7 @@ func destroy_tile(pos: Vector2) -> int:
 	if chunks[chunk_pos][idx] == INF:
 		return -1
 
-	chunks[chunk_pos][idx] -= 1.0 + Global.upgrades["Mining Speed"]
+	chunks[chunk_pos][idx] -= 1.0 + Global.upgrades["Strength"]
 
 	if chunks[chunk_pos][idx] <= 0.0:
 		var atlas_coords := get_cell_atlas_coords(tile_pos)
