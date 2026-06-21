@@ -6,6 +6,7 @@ var upgrades :={
 	"Mining Speed" : 0,
 	"Ground Smash" : 0,
 	"Bombs" : 4,
+	"Drills": 1,
 	"Time" : 0,
 	"Move Speed" : 0
 }
