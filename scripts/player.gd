@@ -8,7 +8,15 @@ var cheese := 0
 @onready var right: RayCast2D = $Right
 @onready var left: RayCast2D = $Left
 @onready var sprite: AnimatedSprite2D = $sprite
+@onready var cheese_label: RichTextLabel = $"../RichTextLabel"
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer" #Loads two other noads, the players sprite and the tilemap.
+
+func update_ui():
+	cheese_label.bbcode_enabled = true
+	cheese_label.text = "[center]🧀 %d[/center]" % cheese
+
+func _ready():
+	update_ui()
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -47,12 +55,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Mining
 	if Input.is_action_just_pressed("dig"):
+		var mined_cheese := false
+
 		if Input.is_action_pressed("down"):
-			tile_map_layer.destroy_tile(position + Vector2(0, 16))
+			mined_cheese = tile_map_layer.destroy_tile(position + Vector2(0, 16))
 			velocity.y = 70
+
 		elif Input.is_action_pressed("up"):
-			tile_map_layer.destroy_tile(position - Vector2(0, 16))
+			mined_cheese = tile_map_layer.destroy_tile(position - Vector2(0, 16))
+
 		else:
-			tile_map_layer.destroy_tile(position + dir * Vector2(16, 0))
+			mined_cheese = tile_map_layer.destroy_tile(position + dir * Vector2(16, 0))
+
+		if mined_cheese:
+			cheese += 1
+			update_ui()
+	print(cheese)
 
 	move_and_slide()
