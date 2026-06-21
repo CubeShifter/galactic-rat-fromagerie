@@ -15,10 +15,12 @@ var cheese := [0,0,0,0,0]
 @onready var sprite: AnimatedSprite2D = $sprite
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
 @onready var cheese_label: RichTextLabel = $"../CanvasLayer/RichTextLabel"
+@onready var v_box_container: VBoxContainer = $"../CanvasLayer3/TextureRect/VBoxContainer"
 
 
 
-
+func _ready() -> void:
+	update_ui()
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
@@ -74,6 +76,7 @@ func handle_mining():
 
 	if mined >= 0:
 		cheese[mined] += 1
+		update_ui()
 		
 
 
@@ -86,4 +89,9 @@ func get_mine_offset() -> Vector2:
 		return Vector2(dir * 16, 0)
 
 
-# UI
+func update_ui():
+	
+	for i in range(5):
+		v_box_container.get_node(String("RichTextLabel" + str(i+1))).text = str(cheese[i])
+		
+ 
