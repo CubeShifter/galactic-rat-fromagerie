@@ -1,130 +1,137 @@
 shader_type canvas_item;
 
-uniform float scanline_count : hint_range(0.0, 1080.0, 1.0) = 288.0; 
-uniform float scanline_intensity : hint_range(0.0, 1.0, 0.01) = 0.25;
+uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
 
-uniform float luminance_blur : hint_range(0.0, 5.0, 0.1) = 1.2; 
-uniform float chroma_bleed : hint_range(0.0, 10.0, 0.1) = 4.0; 
-uniform float chroma_shift : hint_range(0.0, 10.0, 0.1) = 2.0; 
+uniform float mask_density : hint_range(10.0, 1000.0, 1.0) = 400.0;
+uniform float mask_intensity : hint_range(0.0, 1.0, 0.01) = 0.2;
 
-uniform float tracking_height : hint_range(0.0, 1.0, 0.01) = 0.4; 
-uniform float tracking_distortion : hint_range(0.0, 1.0, 0.01) = 0.01; 
-uniform float tracking_noise : hint_range(0.0, 1.0, 0.01) = 0.6; 
+uniform float convergence_intensity : hint_range(0.0, 0.1, 0.001) = 0.02;
 
-uniform float wobble_intensity : hint_range(0.0, 0.1, 0.001) = 0.002;
-uniform float wobble_frequency : hint_range(0.0, 100.0, 0.1) = 4.0; 
+uniform float halation_intensity : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform float halation_radius : hint_range(0.0, 5.0, 0.1) = 2.0;
 
-uniform float tape_noise_intensity : hint_range(0.0, 1.0, 0.01) = 0.1;
-uniform float tape_noise_color : hint_range(0.0, 1.0, 0.01) = 0.3; 
+uniform float tv_brightness : hint_range(-1.0, 1.0, 0.01) = -0.1;
+uniform float tv_contrast : hint_range(0.0, 3.0, 0.01) = 1.25;
+uniform float tv_saturation : hint_range(0.0, 3.0, 0.01) = 0.75;
 
-uniform float chroma_streak_frequency : hint_range(0.0, 1.0, 0.001) = 0.02;
-uniform float chroma_streak_intensity : hint_range(0.0, 1.0, 0.01) = 0.1;
-uniform float chroma_streak_height : hint_range(0.0, 1.0, 0.001) = 0.02;
+uniform float vignette_intensity : hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform float vignette_smoothness : hint_range(0.0, 2.0, 0.01) = 0.5;
 
-uniform float dropout_frequency : hint_range(0.0, 1.0, 0.01) = 0.02;
-uniform float dropout_intensity : hint_range(0.0, 1.0, 0.01) = 0.2;
-uniform float dropout_height : hint_range(0.0, 1.0, 0.001) = 0.2;
-
-float random(vec2 uv) {
-    return fract(sin(dot(uv.xy, vec2(12.9898,78.233))) * 43758.5453123);
-}
-
-float smooth_noise(float x) {
-    float i = floor(x);
-    float f = fract(x);
-    float u = f * f * (3.0 - 2.0 * f); 
-    return mix(random(vec2(i, i)), random(vec2(i + 1.0, i + 1.0)), u);
-}
+uniform float corner_radius : hint_range(0.0, 0.5, 0.01) = 0.01;
+uniform float border_thickness_horizontal : hint_range(0.0, 0.5, 0.001) = 0.006;
+uniform float border_thickness_vertical : hint_range(0.0, 0.5, 0.001) = 0.008;
+uniform float border_smoothness : hint_range(0.0, 0.1, 0.001) = 0.002;
 
 void fragment() {
-    vec2 pixel_size = TEXTURE_PIXEL_SIZE;
-    vec2 time_offset = vec2(random(vec2(TIME, 0.0)), random(vec2(TIME, 1.0)));
-    
-	// tape wobble
-    float wow = smooth_noise(UV.y * wobble_frequency + TIME * 2.0) * 2.0 - 1.0;
-    float flutter = smooth_noise(UV.y * wobble_frequency * 3.0 - TIME * 4.0) * 2.0 - 1.0;
-    float total_wobble = (wow + flutter * 0.4) * wobble_intensity;
+    vec2 uv = SCREEN_UV;
 
-    // tracking distortion
-    float bottom_mask = smoothstep(1.0 - tracking_height, 1.0, UV.y);
-    float tear_noise = random(vec2(UV.y * 200.0, TIME * 10.0)); 
-    float skew = random(vec2(TIME * 2.0, 0.0)) - 0.5; 
-    float head_shift = ((tear_noise - 0.5) * 0.5 + skew * 0.5) * tracking_distortion * bottom_mask;
-    
-    vec2 base_uv = UV + vec2(head_shift + total_wobble, 0.0);
-    
-    // color bleed
-    vec2 blur_step = vec2(luminance_blur * pixel_size.x, 0.0);
-    vec2 bleed_step = vec2((luminance_blur + chroma_bleed) * pixel_size.x, 0.0);
-    vec2 shift = vec2(chroma_shift * pixel_size.x, 0.0);
-    
-    vec3 color = vec3(0.0);
-    float w0 = 0.4026; // weights (w0 + 2 x w1 + 2 x w2 = 1.0)
-	float w1 = 0.2442; 
-	float w2 = 0.0545;
-    
-    color.r += texture(TEXTURE, base_uv + shift).r * w0;
-    color.g += texture(TEXTURE, base_uv).g * w0;
-    color.b += texture(TEXTURE, base_uv - shift).b * w0;
-    
-    color.r += texture(TEXTURE, base_uv + bleed_step + shift).r * w1;
-    color.g += texture(TEXTURE, base_uv + blur_step).g * w1;
-    color.b += texture(TEXTURE, base_uv + bleed_step - shift).b * w1;
-    
-    color.r += texture(TEXTURE, base_uv - bleed_step + shift).r * w1;
-    color.g += texture(TEXTURE, base_uv - blur_step).g * w1;
-    color.b += texture(TEXTURE, base_uv - bleed_step - shift).b * w1;
-    
-    color.r += texture(TEXTURE, base_uv + 2.0 * bleed_step + shift).r * w2;
-    color.g += texture(TEXTURE, base_uv + 2.0 * blur_step).g * w2;
-    color.b += texture(TEXTURE, base_uv + 2.0 * bleed_step - shift).b * w2;
-	
-    color.r += texture(TEXTURE, base_uv - 2.0 * bleed_step + shift).r * w2;
-    color.g += texture(TEXTURE, base_uv - 2.0 * blur_step).g * w2;
-    color.b += texture(TEXTURE, base_uv - 2.0 * bleed_step - shift).b * w2;
+    vec2 pixel_size = vec2(
+        1.0 / float(textureSize(screen_texture, 0).x),
+        1.0 / float(textureSize(screen_texture, 0).y)
+    );
 
-    float alpha = texture(TEXTURE, base_uv).a;
+    vec2 center_uv = uv - vec2(0.5);
+    float dist_sq = dot(center_uv, center_uv);
 
-    // tracking noise
-    float head_static = random(base_uv + time_offset);
-    color = mix(color, vec3(head_static), bottom_mask * tracking_noise * tear_noise);
-    float fps_time = floor(TIME * 25.0);
-    vec2 frame_offset = vec2(random(vec2(fps_time, 0.0)), random(vec2(fps_time, 1.0)));
+    // Convergence
+    vec2 convergence_offset = center_uv * dist_sq * convergence_intensity;
 
-    // chroma loss streaks
-    vec2 chroma_grid = vec2(floor(UV.x * 1.0), floor(UV.y / max(0.0001, chroma_streak_height)));
-    float chroma_val = random(chroma_grid + frame_offset * 50.0);
-    float is_chroma_streak = step(1.0 - chroma_streak_frequency, chroma_val);
-    vec3 shifted_chroma = vec3(color.g, color.b, color.r);
-    float color_coin_flip = step(0.5, random(chroma_grid + fps_time));
-    shifted_chroma = mix(shifted_chroma, vec3(color.b, color.r, color.g), color_coin_flip);
-    color = mix(color, shifted_chroma, is_chroma_streak * chroma_streak_intensity);
+    float r = texture(screen_texture, uv + convergence_offset).r;
+    float g = texture(screen_texture, uv).g;
+    float b = texture(screen_texture, uv - convergence_offset).b;
 
-    // dropouts
-    float dropout_grid = floor(UV.y / max(0.0001, dropout_height));
-    float dropout_val = random(vec2(dropout_grid, frame_offset.x));
-    float is_dropout = step(1.0 - dropout_frequency, dropout_val);
-    float dropout_static = random(UV + frame_offset * 100.0);
-    color = mix(color, vec3(dropout_static), is_dropout * dropout_intensity);
+    vec3 base_color = vec3(r, g, b);
+    float alpha = texture(screen_texture, uv).a;
 
-    // noise/snow
-    vec2 noise_uv = base_uv * vec2(400.0, 300.0); 
-    float noise_r = random(noise_uv + time_offset);
-    float noise_g = random(noise_uv + time_offset * 1.1);
-    float noise_b = random(noise_uv + time_offset * 1.2);
-    vec3 luma_noise = vec3(noise_g);
-    vec3 chroma_noise = vec3(noise_r, noise_g, noise_b);
-    vec3 final_noise = mix(luma_noise, chroma_noise, tape_noise_color);
-    float luminance = dot(color, vec3(0.299, 0.587, 0.114));
-    float noise_shift = mix(0.0, 0.5, luminance);
-    float noise_volume = mix(tape_noise_intensity * 2.0, tape_noise_intensity, luminance);
-    color += (final_noise - noise_shift) * noise_volume;
-    color = clamp(color, 0.0, 1.0);
+    // Halation
+    vec2 blur_step = pixel_size * halation_radius;
 
-    // scanlines
-    float scanline_wave = sin(UV.y * scanline_count * PI * 2.0);
-    float scanline_normalized = scanline_wave * 0.5 + 0.5;
-    float scanline_multiplier = mix(1.0 - scanline_intensity, 1.0, scanline_normalized);
+    vec3 bloom = base_color * 0.382928;
+    bloom += texture(screen_texture, uv + vec2(blur_step.x, 0.0)).rgb * 0.241732;
+    bloom += texture(screen_texture, uv - vec2(blur_step.x, 0.0)).rgb * 0.241732;
+    bloom += texture(screen_texture, uv + vec2(0.0, blur_step.y)).rgb * 0.060598;
+    bloom += texture(screen_texture, uv - vec2(0.0, blur_step.y)).rgb * 0.060598;
 
-    COLOR = vec4(color * scanline_multiplier, alpha);
+    vec3 final_color = base_color + bloom * halation_intensity;
+
+    // TV settings
+    final_color += tv_brightness;
+
+    final_color =
+        (final_color - vec3(0.5))
+        * tv_contrast
+        + vec3(0.5);
+
+    float luminance =
+        dot(final_color, vec3(0.299, 0.587, 0.114));
+
+    final_color =
+        mix(vec3(luminance), final_color, tv_saturation);
+
+    final_color = clamp(final_color, 0.0, 1.0);
+
+    // RGB mask
+    float phase = uv.x * mask_density * PI * 2.0;
+
+    vec3 mask = vec3(
+        clamp(sin(phase) * 2.0, 0.0, 1.0),
+        clamp(sin(phase - 2.09439) * 2.0, 0.0, 1.0),
+        clamp(sin(phase - 4.18879) * 2.0, 0.0, 1.0)
+    );
+
+    final_color *= mix(vec3(1.0), mask, mask_intensity);
+
+    // Vignette
+    float dist = length(center_uv);
+
+    float vig =
+        1.0 -
+        smoothstep(
+            1.0 - vignette_smoothness,
+            1.0,
+            dist * 1.414
+        );
+
+    final_color =
+        mix(final_color, final_color * vig, vignette_intensity);
+
+    // CRT border
+    vec2 aspect = vec2(
+        pixel_size.y / pixel_size.x,
+        1.0
+    );
+
+    vec2 aspect_uv = center_uv * aspect;
+
+    vec2 border_thickness =
+        vec2(
+            border_thickness_horizontal,
+            border_thickness_vertical
+        );
+
+    vec2 box_size =
+        (vec2(0.5) - border_thickness)
+        * aspect;
+
+    vec2 q =
+        abs(aspect_uv)
+        - box_size
+        + vec2(corner_radius);
+
+    float box_dist =
+        min(max(q.x, q.y), 0.0)
+        + length(max(q, 0.0))
+        - corner_radius;
+
+    float border_mask =
+        1.0 -
+        smoothstep(
+            0.0,
+            border_smoothness,
+            box_dist
+        );
+
+    final_color *= border_mask;
+
+    COLOR = vec4(final_color, alpha);
 }
