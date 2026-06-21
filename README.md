@@ -1,4 +1,4 @@
-### _**Welcome to the**_
+### _**Welcome to the...**_
 # Galactic Rat Fromagerie
 
 You have just been recruited by _**Galactic Cheese-Mining Enterprises™**_, the primary producer and distributor of cheese in the Rattus Caseum region of the known universe.
