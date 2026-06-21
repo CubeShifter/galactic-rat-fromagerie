@@ -125,3 +125,55 @@ theme_override_fonts/normal_font = ExtResource("4_032fp")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]12"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1614916191]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 20.0
+offset_right = 1076.0
+offset_bottom = 110.0
+
+[node name="RichTextLabel1" type="RichTextLabel" parent="HBoxContainer" unique_id=436205263]
+custom_minimum_size = Vector2(236, 16)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Speed I"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="HBoxContainer" unique_id=1723822737]
+custom_minimum_size = Vector2(236, 16)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Mining Speed I"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="HBoxContainer" unique_id=1077347647]
+custom_minimum_size = Vector2(236, 16)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Bombs I"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="HBoxContainer" unique_id=577598604]
+custom_minimum_size = Vector2(236, 16)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Time I"
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="HBoxContainer" unique_id=630319253]
+custom_minimum_size = Vector2(236, 16)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_032fp")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Drill I"
